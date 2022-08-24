@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musica/database/playlist_db.dart';
+import 'package:musica/screens/styles/about_us.dart';
 import 'package:share/share.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -72,7 +73,10 @@ class SettingsScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUs()));
+                  },
                 ),
                 const Divider(
                   thickness: 1,

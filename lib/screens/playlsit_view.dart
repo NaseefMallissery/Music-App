@@ -36,27 +36,13 @@ class _PlayListScState extends State<PlayListSc> {
             padding: const EdgeInsets.all(20),
             child: SafeArea(
               child: Hive.box<MusicPlayer>('playlistDB').isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          // SvgPicture.asset(
-                          //   "assets/playlist.svg",
-                          //   height: 300,
-                          //   width: 200,
-                          // ),
-                          // Text('No playlist'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'No Playlist      ',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white70,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ],
+                  ? const Center(
+                      child: Text(
+                        'No Playlist',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w300),
                       ),
                     )
                   : GridView.builder(
@@ -247,9 +233,6 @@ class _PlayListScState extends State<PlayListSc> {
                                 SizedBox(
                                     width: 100.0,
                                     child: ElevatedButton(
-                                        // style: ElevatedButton.styleFrom(
-                                        //     primary: const Color.fromARGB(
-                                        //         255, 255, 255, 255)),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
