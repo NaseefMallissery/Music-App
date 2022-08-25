@@ -32,17 +32,16 @@ class _PlayListScState extends State<PlayListSc> {
             ),
             centerTitle: true,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: SafeArea(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
               child: Hive.box<MusicPlayer>('playlistDB').isEmpty
                   ? const Center(
                       child: Text(
                         'No Playlist',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w300),
+                          color: Colors.white70,
+                        ),
                       ),
                     )
                   : GridView.builder(
@@ -79,8 +78,6 @@ class _PlayListScState extends State<PlayListSc> {
                                       color: Colors.transparent,
                                       elevation: 0,
                                       child: Column(
-                                        // crossAxisAlignment:
-                                        //     CrossAxisAlignment.stretch,
                                         children: [
                                           Expanded(
                                             child: Lottie.asset(
@@ -182,7 +179,8 @@ class _PlayListScState extends State<PlayListSc> {
                     ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton.extended(
+            label: const Text('New playlist'),
             splashColor: Colors.transparent,
             onPressed: () {
               showDialog(
@@ -270,10 +268,9 @@ class _PlayListScState extends State<PlayListSc> {
                 },
               );
             },
-            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            child: const Icon(
+            backgroundColor: const Color.fromARGB(255, 16, 183, 71),
+            icon: const Icon(
               Icons.playlist_add,
-              color: Colors.black,
             ),
           ),
         );

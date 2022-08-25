@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:musica/model/music_player.dart';
@@ -16,10 +17,14 @@ Future<void> main() async {
   await Hive.openBox<MusicPlayer>('playlistDB');
 
   await JustAudioBackground.init(
-      androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-      androidNotificationChannelName: 'Audio playback',
-      androidNotificationOngoing: true,
-      preloadArtwork: true);
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+    preloadArtwork: true,
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(const MyApp());
 }
@@ -32,7 +37,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rhythm',
       theme: ThemeData(
-          // fontFamily: 'Signatra',
           colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: const Color.fromARGB(255, 17, 17, 17),
           ),

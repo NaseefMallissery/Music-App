@@ -74,8 +74,10 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutUs()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AboutUs()));
                   },
                 ),
                 const Divider(

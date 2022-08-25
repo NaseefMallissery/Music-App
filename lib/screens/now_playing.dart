@@ -279,14 +279,6 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                         const Spacer(),
                         FavoriteBut(song: widget.playerSong[currentIndex]),
                         const Spacer(),
-                        // IconButton(
-                        //   onPressed: () {},
-                        //   icon: Icon(
-                        //     Icons.playlist_add,
-                        //     color: Colors.white,
-                        //     size: MediaQuery.of(context).size.width * 0.08,
-                        //   ),
-                        // ),
                         const Spacer(),
                       ],
                     )

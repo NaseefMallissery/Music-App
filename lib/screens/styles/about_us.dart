@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);
@@ -19,18 +17,16 @@ class AboutUs extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SafeArea(
+      body: const SafeArea(
           child: Padding(
         padding: EdgeInsets.only(
           top: 30,
           left: 15,
           right: 15,
         ),
-        child: Container(
-          child: Text(
-            '''This application is created by Naseef Ali.M at Brototype.The app promises a user friendly experience to the customers and highlights the simple and important features needed in a music player''',
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          ),
+        child: Text(
+          '''This application is created by Naseef Ali.M at Brototype.The app promises a user friendly experience to the customers and highlights the simple and important features needed in a music player''',
+          style: TextStyle(color: Colors.white, fontSize: 17),
         ),
       )),
     );

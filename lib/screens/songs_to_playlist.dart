@@ -22,88 +22,85 @@ class _SongListPageState extends State<SongListPage> {
             'Add Songs',
             style: TextStyle(color: Colors.white),
           ),
+          centerTitle: true,
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: FutureBuilder<List<SongModel>>(
-                future: audioQuery.querySongs(
-                    sortType: null,
-                    orderType: OrderType.ASC_OR_SMALLER,
-                    uriType: UriType.EXTERNAL,
-                    ignoreCase: true),
-                builder: (context, item) {
-                  if (item.data == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
+          child: FutureBuilder<List<SongModel>>(
+              future: audioQuery.querySongs(
+                  sortType: null,
+                  orderType: OrderType.ASC_OR_SMALLER,
+                  uriType: UriType.EXTERNAL,
+                  ignoreCase: true),
+              builder: (context, item) {
+                if (item.data == null) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  );
+                }
+                if (item.data!.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      'No Songs Found',
+                      style: TextStyle(
+                        color: Colors.white70,
                       ),
-                    );
-                  }
-                  if (item.data!.isEmpty) {
-                    return const Center(
-                      child: Text(
-                        'No Songs Found',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                    );
-                  }
-                  return ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (ctx, index) {
-                        return ListTile(
-                          onTap: () {},
-                          iconColor: const Color.fromARGB(255, 255, 255, 255),
-                          textColor: const Color.fromARGB(255, 255, 255, 255),
-                          leading: QueryArtworkWidget(
-                            id: item.data![index].id,
-                            type: ArtworkType.AUDIO,
-                            nullArtworkWidget: CircleAvatar(
-                              radius: MediaQuery.of(context).size.width * 0.075,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 43, 42, 42),
-                              child: const Icon(
-                                Icons.music_note,
-                                color: Colors.white,
-                              ),
+                    ),
+                  );
+                }
+                return ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (ctx, index) {
+                      return ListTile(
+                        onTap: () {},
+                        iconColor: const Color.fromARGB(255, 255, 255, 255),
+                        textColor: const Color.fromARGB(255, 255, 255, 255),
+                        leading: QueryArtworkWidget(
+                          id: item.data![index].id,
+                          type: ArtworkType.AUDIO,
+                          nullArtworkWidget: CircleAvatar(
+                            radius: MediaQuery.of(context).size.width * 0.075,
+                            backgroundColor:
+                                const Color.fromARGB(255, 43, 42, 42),
+                            child: const Icon(
+                              Icons.music_note,
+                              color: Colors.white,
                             ),
-                            artworkFit: BoxFit.fill,
-                            artworkBorder:
-                                const BorderRadius.all(Radius.circular(30)),
                           ),
-                          title: Text(
-                            item.data![index].displayNameWOExt,
-                            maxLines: 1,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          subtitle: Text(
-                            "${item.data![index].artist}",
-                            maxLines: 1,
-                          ),
-                          trailing: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  playlistCheck(item.data![index]);
+                          artworkFit: BoxFit.fill,
+                          artworkBorder:
+                              const BorderRadius.all(Radius.circular(30)),
+                        ),
+                        title: Text(
+                          item.data![index].displayNameWOExt,
+                          maxLines: 1,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          "${item.data![index].artist}",
+                          maxLines: 1,
+                        ),
+                        trailing: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                playlistCheck(item.data![index]);
 
-                                  playlistnotifier.notifyListeners();
-                                });
-                              },
-                              icon: !widget.playlist
-                                      .isValueIn(item.data![index].id)
-                                  ? const Icon(Icons.add)
-                                  : const Icon(Icons.check)),
-                        );
-                      },
-                      separatorBuilder: (ctx, index) {
-                        return const Divider();
-                      },
-                      itemCount: item.data!.length);
-                }),
-          ),
+                                playlistnotifier.notifyListeners();
+                              });
+                            },
+                            icon:
+                                !widget.playlist.isValueIn(item.data![index].id)
+                                    ? const Icon(Icons.add)
+                                    : const Icon(Icons.check)),
+                      );
+                    },
+                    separatorBuilder: (ctx, index) {
+                      return const Divider();
+                    },
+                    itemCount: item.data!.length);
+              }),
         ));
   }
 

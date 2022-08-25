@@ -51,20 +51,23 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
+          title: const Text(
+            'Search',
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
+          centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 60,
-              ),
-              TextField(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 60,
+                ),
+                TextField(
                   onChanged: (value) => search(value),
                   decoration: const InputDecoration(
                     hintText: 'Search...',
@@ -72,56 +75,62 @@ class _SearchState extends State<Search> {
                     filled: true,
                     fillColor: Color.fromARGB(255, 245, 242, 244),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                  )),
-              Expanded(
-                child: _foundSongs.isNotEmpty
-                    ? ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: QueryArtworkWidget(
-                              id: _foundSongs[index].id,
-                              type: ArtworkType.AUDIO,
-                              nullArtworkWidget: CircleAvatar(
-                                radius:
-                                    MediaQuery.of(context).size.width * 0.075,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 43, 42, 42),
-                                child: const Icon(
-                                  Icons.music_note,
-                                  color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: _foundSongs.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              leading: QueryArtworkWidget(
+                                id: _foundSongs[index].id,
+                                type: ArtworkType.AUDIO,
+                                nullArtworkWidget: CircleAvatar(
+                                  radius:
+                                      MediaQuery.of(context).size.width * 0.075,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 43, 42, 42),
+                                  child: const Icon(
+                                    Icons.music_note,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            title: Text(
-                              _foundSongs[index].displayNameWOExt,
-                              maxLines: 1,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            subtitle: Text(
-                              "${_foundSongs[index].artist}",
-                              maxLines: 1,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
+                              title: Text(
+                                _foundSongs[index].displayNameWOExt,
+                                maxLines: 1,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              subtitle: Text(
+                                "${_foundSongs[index].artist}",
+                                maxLines: 1,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
                                     builder: (ctx) => NowPlayingScreen(
-                                        playerSong: HomeScreen.song)),
-                              );
-                            },
-                          );
-                        },
-                        itemCount: _foundSongs.length)
-                    : const Center(
-                        child: Text(
-                          'No results found',
-                          style: TextStyle(fontSize: 24),
+                                        playerSong: HomeScreen.song),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          itemCount: _foundSongs.length)
+                      : const Center(
+                          child: Text(
+                            'No results found',
+                            style: TextStyle(fontSize: 24),
+                          ),
                         ),
-                      ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ));
   }
