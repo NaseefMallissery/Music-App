@@ -140,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
             Text(
-              'v.1.0.0',
+              'v.1.0.1',
               style: TextStyle(
                   color: Colors.grey,
                   fontSize: MediaQuery.of(context).size.width * 0.04),
