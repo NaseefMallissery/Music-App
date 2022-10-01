@@ -53,7 +53,6 @@ class _PlaylistDataState extends State<PlaylistData> {
               : ListView.separated(
                   reverse: true,
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (ctx, index) {
                     return ListTile(
